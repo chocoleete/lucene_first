@@ -25,12 +25,12 @@ public class SearchIndex {
      * @throws IOException
      */
     private IndexSearcher getIndexSearcher() throws IOException {
-        //指定索引库存放路径
+        // 指定索引库存放路径
         String indexPath = "G:\\i_学习\\java\\javascrip\\Day71_lucene&solr_20170301\\lucene&solr\\day01\\资料\\index";
         FSDirectory directory = FSDirectory.open(new File(indexPath));
-        //创建一个indexReader对象
+        // 创建一个indexReader对象
         IndexReader indexReader = DirectoryReader.open(directory);
-        //创建indexSearcher对象
+        // 创建indexSearcher对象
         IndexSearcher indexSearcher = new IndexSearcher(indexReader);
         return indexSearcher;
     }
