@@ -24,14 +24,15 @@ public class IndexManager {
      * 获取indexWriter
      */
     public IndexWriter getIndexWriter() throws IOException {
-        //索引库存放路径
+        // 索引库存放路径
         String path = "G:\\i_学习\\java\\javascrip\\Day71_lucene&solr_20170301\\lucene&solr\\day01\\资料\\index";
         FSDirectory directory = FSDirectory.open(new File(path));
-        /*创建一个indexWriterConfig对象
-        * 第一个参数： Lucene的版本信息，可以选择对应的lucene版本也可以使用LATEST
-        * 第二根参数：分析器对象*/
-        IndexWriterConfig conf=new IndexWriterConfig(Version.LATEST,new IKAnalyzer());
-        //创建一个indexWriter对象
+        /**
+         * 创建一个indexWriterConfig对象
+         * 第一个参数： Lucene的版本信息，可以选择对应的lucene版本也可以使用LATEST
+         * 第二根参数：分析器对象*/
+        IndexWriterConfig conf = new IndexWriterConfig(Version.LATEST, new IKAnalyzer());
+        // 创建一个indexWriter对象
         IndexWriter indexWriter = new IndexWriter(directory, conf);
         return indexWriter;
     }
@@ -41,17 +42,18 @@ public class IndexManager {
      */
     public void addDocument() throws IOException {
         IndexWriter indexWriter = this.getIndexWriter();
-        //创建一个document对象
+        // 创建一个document对象
         Document document = new Document();
-        /*向document对象中添加域
-        * 不同的document可以有不同的域，同一个document可以有相同的域*/
+        /**
+         * 向document对象中添加域
+         * 不同的document可以有不同的域，同一个document可以有相同的域*/
         document.add(new TextField("fileName","新添加的文档.txt", Field.Store.YES));
         document.add(new TextField("content","新添加的文档的内容", Field.Store.YES));
         document.add(new TextField("content","新添加的文档的内容，第二个content", Field.Store.YES));
         document.add(new TextField("content1", "新添加的文档的内容要能看到", Field.Store.YES));
-        //添加文档到索引库
+        // 添加文档到索引库
         indexWriter.addDocument(document);
-        //关闭indexWriter
+        // 关闭indexWriter
         indexWriter.close();
      }
 
@@ -59,11 +61,11 @@ public class IndexManager {
      * 删除全部索引 慎用
      */
     public void deleteAllIndex() throws IOException {
-        //获取indexWriter
+        // 获取indexWriter
         IndexWriter indexWriter = this.getIndexWriter();
-        //删除全部
+        // 删除全部
         indexWriter.deleteAll();
-        //关闭indexWriter
+        // 关闭indexWriter
         indexWriter.close();
     }
 
@@ -71,13 +73,13 @@ public class IndexManager {
      * 根据查询条件删除索引
      */
     public void deleteIndexByQuery() throws IOException {
-        //创建indexWriter对象
+        // 创建indexWriter对象
         IndexWriter indexWriter = this.getIndexWriter();
-        //创建一个查询条件
+        // 创建一个查询条件
         Query query = new TermQuery(new Term("fileName", "apache"));
-        //根据查询条件删除
+        // 根据查询条件删除
         indexWriter.deleteDocuments(query);
-        //关闭indexWriter
+        // 关闭indexWriter
         indexWriter.close();
     }
 

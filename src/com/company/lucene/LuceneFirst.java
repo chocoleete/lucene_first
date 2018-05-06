@@ -128,10 +128,12 @@ public class LuceneFirst {
     public void testTokenStream() throws IOException {
         // 创建一个标准分析器对象
         Analyzer standardAnalyzer = new StandardAnalyzer();
+        IKAnalyzer ikAnalyzer = new IKAnalyzer();
         /**获得tokenStream对象
          * 第一个参数：域名，可以随便给一个
          * 第二个参数：要分析的文本内容*/
-        TokenStream tokenStream = standardAnalyzer.tokenStream("test", "The Spring Framework provides a comprehensive programming and configuration model.");
+        //TokenStream tokenStream = standardAnalyzer.tokenStream("test", "The Spring Framework provides a comprehensive programming and configuration model.");
+        TokenStream tokenStream = ikAnalyzer.tokenStream("文件名", "这只是我随便写的一句话，其实我也不知道我想做什么。抖音这个软件还是不错的，让我看到很多以前不知道的东西，但会让人产生依赖，容易造成拖延症");
         // 添加一个引用，可以获得每个关键词
         CharTermAttribute charTermAttribute = tokenStream.addAttribute(CharTermAttribute.class);
         // 添加一个偏移量的引用，记录关键词的开始位置及结束位置
@@ -141,11 +143,11 @@ public class LuceneFirst {
         // 遍历关键词列表，通过incrementToken方法判断列表是否结束
         while (tokenStream.incrementToken()) {
             // 关键词的起始位置
-            System.out.println("start-->"+offsetAttribute.startOffset());
+            System.out.println("start-->" + offsetAttribute.startOffset());
             // 取关键词
             System.out.println(charTermAttribute);
             // 关键词的结束位置
-            System.out.println("end-->"+offsetAttribute.endOffset());
+            System.out.println("end-->" + offsetAttribute.endOffset());
         }
         // 关流
         tokenStream.close();
