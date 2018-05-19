@@ -87,17 +87,18 @@ public class IndexManager {
      * 修改索引库
      */
     public void updateIndex() throws IOException {
-        //创建indexWriter对象
+        // 创建indexWriter对象
         IndexWriter indexWriter = this.getIndexWriter();
-        //创建一个document对象
+        // 创建一个document对象
         Document document = new Document();
-        /*向document对象中添加域
-        * 不同的document可以有不同的域，同一个document可以有相同的域*/
+        /**
+         * 向document对象中添加域
+         * 不同的document可以有不同的域，同一个document可以有相同的域*/
         document.add(new TextField("fileName","要更新的文档", Field.Store.YES));
         document.add(new TextField("content","2013年11月18日 - Lucene 简介 Lucene 是一个基于 Java 的全文信息检索工具包,它不是一个完整的搜索应用程序,而是为你的应用程序提供索引和搜索功能。", Field.Store.YES));
-        //更新内容,将"java"更新为document中的内容
+        // 更新内容,将"java"更新为document中的内容
         indexWriter.updateDocument(new Term("content","java"),document);
-        //关闭indexWriter
+        // 关闭indexWriter
         indexWriter.close();
      }
 }

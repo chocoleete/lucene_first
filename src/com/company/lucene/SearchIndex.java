@@ -39,26 +39,29 @@ public class SearchIndex {
      * 查询索引库
      */
     private void printResult(IndexSearcher indexSearcher, Query query) throws IOException {
-        /*执行查询
-        * 第一个参数：查询对象
-        * 第二个参数：查询结果返回的最大值*/
+        /**
+         * 执行查询
+         * 第一个参数：查询对象
+         * 第二个参数：查询结果返回的最大值*/
         TopDocs topDocs = indexSearcher.search(query, 10);
         //查询结果的总条数
         int totalHits = topDocs.totalHits;
         System.out.println("查询结果的总条数：" + totalHits);
-        /*遍历查询结果
-        * topDocs.scoreDocs存储了document的对象id*/
+        /**
+         * 遍历查询结果
+         * topDocs.scoreDocs存储了document的对象id*/
         for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
-            /*scoreDoc.doc属性就是document对象的id
-            * 根据document的id查找document对象*/
+            /**
+             * scoreDoc.doc属性就是document对象的id
+             * 根据document的id查找document对象*/
             Document doc = indexSearcher.doc(scoreDoc.doc);
-            //打印结果
+            // 打印结果
             System.out.println("fileName:"+doc.get("fileName"));
             System.out.println("size:"+doc.get("size"));
-            //System.out.println("content:"+doc.get("content"));
+            // System.out.println("content:"+doc.get("content"));
             System.out.println("path:"+doc.get("path"));
         }
-        //关闭indexReader
+        // 关闭indexReader
         indexSearcher.getIndexReader().close();
     }
 
@@ -66,9 +69,9 @@ public class SearchIndex {
      * 测试MatchAllDocsQuery()
      */
     public void matchAllDocsQueryDemo() throws IOException {
-        //获取indexSearch
+        // 获取indexSearch
         IndexSearcher indexSearcher = this.getIndexSearcher();
-        //创建一个Query对象
+        // 创建一个Query对象
         Query query = new MatchAllDocsQuery();
         System.out.println(query);
         //执行查询
