@@ -97,36 +97,37 @@ public class SearchIndex {
     public void numericRangeQueryDemo() throws IOException {
         //获取indexSearch
         IndexSearcher indexSearcher = this.getIndexSearcher();
-        /*创建查询
-        * 参数
-        * 1、域名
-        * 2、最小值
-        * 3、最大值
-        * 4、是不包含最小值
-        * 5、是否包含最大值*/
+        /**创建查询
+         * 参数
+         * 1、域名
+         * 2、最小值
+         * 3、最大值
+         * 4、是不包含最小值
+         * 5、是否包含最大值*/
         Query query = NumericRangeQuery.newLongRange("size", 1L, 1024L, true, true);
         System.out.println(query);
-        //执行查询
+        // 执行查询
         printResult(indexSearcher,query);
     }
 
     /**
+     * 组合查询
      * BooleanQuery
      */
     public void booleanQueryDemo() throws IOException {
-        //获取indexSearch对象
+        // 获取indexSearch对象
         IndexSearcher indexSearcher = this.getIndexSearcher();
-        //创建一个boolean查询对象
+        // 创建一个boolean查询对象
         BooleanQuery query = new BooleanQuery();
-        //创建第一个查询条件
+        // 创建第一个查询条件
         Query query1 = new TermQuery(new Term("fileName", "apache"));
-        //创建第二个查询条件
+        // 创建第二个查询条件
         Query query2 = new TermQuery(new Term("content", "apache"));
-        //组合查询条件
+        // 组合查询条件
         query.add(query1, BooleanClause.Occur.MUST);
         query.add(query2, BooleanClause.Occur.SHOULD);
         System.out.println(query);
-        //执行查询
+        // 执行查询
         printResult(indexSearcher, query);
     }
 
@@ -138,10 +139,12 @@ public class SearchIndex {
     public void queryParserDemo() throws IOException, ParseException {
         //获取indexSearch
         IndexSearcher indexSearcher = this.getIndexSearcher();
-        /*创建queryParser对象
-        * 第一个参数：默认搜索的域
-        * 第二个参数：分析器对象*/
+        /**
+         * 创建queryParser对象
+         * 第一个参数：默认搜索的域
+         * 第二个参数：分析器对象*/
         QueryParser queryParser = new QueryParser("content", new IKAnalyzer());
+        // 参数是要查询的内容，可以是一句话。先分词，再查询
         Query query = queryParser.parse("Lucene是java开发的");
         System.out.println(query);
         //执行查询
