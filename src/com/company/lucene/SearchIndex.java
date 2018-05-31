@@ -156,17 +156,18 @@ public class SearchIndex {
      * 可以指定多个默认搜索域
      */
     public void multiFieldQueryParser() throws IOException, ParseException {
-        //获取indexSearch对象
+        // 获取indexSearch对象
         IndexSearcher indexSearcher = this.getIndexSearcher();
         //指定默认搜索域
         String[] fields = {"fileName", "content"};
-        /*创建multiFieldQueryParser对象
-        * 第一个参数：默认搜索域，参数类型为字符串数组
-        * 第二个参数：分析器对象*/
+        /**
+         * 创建multiFieldQueryParser对象
+         * 第一个参数：默认搜索域，参数类型为字符串数组
+         * 第二个参数：分析器对象*/
         MultiFieldQueryParser queryParser = new MultiFieldQueryParser(fields, new IKAnalyzer());
         Query query = queryParser.parse("java and apache");
         System.out.println(query);
-        //执行查询
+        // 执行查询
         printResult(indexSearcher,query);
     }
 }
