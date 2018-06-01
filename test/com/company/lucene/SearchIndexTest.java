@@ -18,7 +18,7 @@ public class SearchIndexTest {
      */
     @Test
     public void testMatchAllDocsQueryDemo() throws Exception {
-        //匹配所有索引
+        // 匹配所有索引
         searchIndex.matchAllDocsQueryDemo();
     }
 
@@ -28,7 +28,7 @@ public class SearchIndexTest {
      */
     @Test
     public void testTermQueryDemo() throws Exception {
-        //按条件查询
+        // 按条件查询
         searchIndex.termQueryDemo();
     }
 
@@ -38,7 +38,7 @@ public class SearchIndexTest {
      */
     @Test
     public void testNumericRangeQueryDemo() throws Exception {
-        //根据数值范围查询
+        // 根据数值范围查询
         searchIndex.numericRangeQueryDemo();
     }
 
@@ -48,7 +48,7 @@ public class SearchIndexTest {
      */
     @Test
     public void testBooleanQueryDemo() throws Exception {
-        //组合查询
+        // 组合查询
         searchIndex.booleanQueryDemo();
     }
 
@@ -58,7 +58,7 @@ public class SearchIndexTest {
      */
     @Test
     public void testQueryParserDemo() throws Exception {
-        //使用queryParser查询
+        // 使用queryParser查询
         searchIndex.queryParserDemo();
     }
 
@@ -68,7 +68,7 @@ public class SearchIndexTest {
      */
     @Test
     public void testMultiFieldQueryParser() throws Exception {
-        //查询多个域
+        // 查询多个域
         searchIndex.multiFieldQueryParser();
     }
 }
