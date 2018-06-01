@@ -158,7 +158,7 @@ public class SearchIndex {
     public void multiFieldQueryParser() throws IOException, ParseException {
         // 获取indexSearch对象
         IndexSearcher indexSearcher = this.getIndexSearcher();
-        //指定默认搜索域
+        // 指定默认搜索域
         String[] fields = {"fileName", "content"};
         /**
          * 创建multiFieldQueryParser对象
